@@ -4,7 +4,7 @@ Aplikasi web sederhana namun *powerful* untuk melakukan **scraping data berita**
 
 Proyek ini menggunakan metode **RSS Feed Parsing** (tanpa Selenium/Browser), menjadikannya sangat ringan, cepat, dan stabil untuk dijalankan di server gratisan seperti Streamlit Cloud.
 
-🔗 **Live Demo:** [Klik disini untuk mencoba aplikasi](https://news-scraper-faiq.streamlit.app)
+🔗 **Live Demo:** [Klik disini untuk mencoba aplikasi](https://auto-news-scraper.streamlit.app/)
 
 ---
 
