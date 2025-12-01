@@ -1,4 +1,4 @@
-📰 Google News Scraper (Streamlit Version)
+📰 Google News Scraper
 
 Aplikasi web sederhana namun *powerful* untuk melakukan **scraping data berita** dari Google News secara otomatis. Dibangun menggunakan **Python** dan **Streamlit**, alat ini memungkinkan pengguna untuk mencari berita berdasarkan kata kunci, memfilter tanggal, dan mengunduh hasilnya dalam format **Excel (.xlsx)**.
 
@@ -29,3 +29,13 @@ Proyek ini menggunakan metode **RSS Feed Parsing** (tanpa Selenium/Browser), men
 * **[Pandas](https://pandas.pydata.org/)** - Untuk manipulasi data dan pembuatan tabel.
 * **[BeautifulSoup4](https://www.crummy.com/software/BeautifulSoup/)** - Untuk parsing data XML/HTML dari Google News.
 * **[Requests](https://pypi.org/project/requests/)** - Untuk mengirim permintaan HTTP ke server Google.
+
+📂 Struktur Proyek
+news-scraper/
+├── app.py              # Main application logic (Frontend & Backend)
+├── requirements.txt    # List of dependencies
+└── README.md           # Project documentation
+
+🤝 Kontribusi
+Feel free to fork this repository and submit pull requests. Any suggestions to improve the scraper logic or UI are welcome!
+Made with ❤️ by Muhamad Fa'iq Awaludin Syiam
