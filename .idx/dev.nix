@@ -1,53 +1,48 @@
-# To learn more about how to use Nix to configure your environment
-# see: https://developers.google.com/idx/guides/customize-idx-env
+# .idx/dev.nix - Konfigurasi Server Scraper
 { pkgs, ... }: {
-  # Which nixpkgs channel to use.
-  channel = "stable-24.05"; # or "unstable"
-  # Use https://search.nixos.org/packages to find packages
+  
+  # 1. Install Software yang dibutuhkan
+  channel = "stable-23.11"; 
   packages = [
-    # pkgs.go
-    # pkgs.python311
-    # pkgs.python311Packages.pip
-    # pkgs.nodejs_20
-    # pkgs.nodePackages.nodemon
+    pkgs.python3
+    pkgs.python311Packages.pip
+    # Wajib install Chrome & Driver untuk Selenium
+    pkgs.chromium
+    pkgs.chromedriver
   ];
-  # Sets environment variables in the workspace
-  env = {};
+
+  # 2. Pengaturan Environment
+  env = {
+    # Memberitahu Python dimana Chrome berada
+    CHROME_BIN = "${pkgs.chromium}/bin/chromium";
+    CHROMEDRIVER_PATH = "${pkgs.chromedriver}/bin/chromedriver";
+  };
+
   idx = {
-    # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
-      # "vscodevim.vim"
-      "google.gemini-cli-vscode-ide-companion"
+      "ms-python.python"
     ];
-    # Enable previews
+
+    # 3. Setting Preview (Menjalankan Streamlit)
     previews = {
       enable = true;
       previews = {
-        # web = {
-        #   # Example: run "npm run dev" with PORT set to IDX's defined port for previews,
-        #   # and show it in IDX's web preview panel
-        #   command = ["npm" "run" "dev"];
-        #   manager = "web";
-        #   env = {
-        #     # Environment variables to set for your server
-        #     PORT = "$PORT";
-        #   };
-        # };
+        web = {
+          # Perintah untuk menjalankan Streamlit di port yang benar
+          command = ["streamlit" "run" "app.py" "--server.port" "$PORT" "--server.address" "0.0.0.0"];
+          manager = "web";
+        };
       };
     };
-    # Workspace lifecycle hooks
+
     workspace = {
-      # Runs when a workspace is first created
+      # Install library python saat project dibuat
       onCreate = {
-        # Example: install JS dependencies from NPM
-        # npm-install = "npm install";
-        # Open editors for the following files by default, if they exist:
-        default.openFiles = [ ".idx/dev.nix" "README.md" ];
+        install-deps = "pip install -r requirements.txt";
       };
-      # Runs when the workspace is (re)started
+      # Install ulang saat project dibuka (jaga-jaga)
       onStart = {
-        # Example: start a background task to watch and re-build backend code
-        # watch-backend = "npm run watch-backend";
+        install-deps = "pip install -r requirements.txt";
       };
     };
   };
